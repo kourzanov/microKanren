@@ -6,7 +6,7 @@
 (define (var=? x1 x2) (= (vector-ref x1 0) (vector-ref x2 0)))
 
 (define (walk u s)
-  (let ((pr (and (var? u) (assp (lambda (v) (var=? u v)) s))))
+  (let ((pr (and (var? u) (find (lambda (v) (var=? u (car v))) s))))
     (if pr (walk (cdr pr) s) u)))
 
 (define (ext-s x v s) `((,x . ,v) . ,s))

@@ -30,7 +30,7 @@
 (define-syntax run
   (syntax-rules ()
     ((_ n (x ...) g0 g ...)
-     (map reify-1st (take n (call/goal (fresh (x ...) g0 g ...)))))))
+     (map reify-1st (Take n (call/goal (fresh (x ...) g0 g ...)))))))
 
 (define-syntax run*
   (syntax-rules ()
@@ -48,10 +48,10 @@
   (let (($ (pull $)))
     (if (null? $) '() (cons (car $) (take-all (cdr $))))))
 
-(define (take n $)
+(define (Take n $)
   (if (zero? n) '()
     (let (($ (pull $)))
-      (if (null? $) '() (cons (car $) (take (- n 1) (cdr $)))))))
+      (if (null? $) '() (cons (car $) (Take (- n 1) (cdr $)))))))
 
 (define (reify-1st s/c)
   (let ((v (walk* (var 0) (car s/c))))
